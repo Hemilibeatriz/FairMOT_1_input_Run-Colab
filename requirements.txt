@@ -11,5 +11,6 @@ openpyxl
 Pillow
 ensobrada
 fvcore
-torch torchvision
+torch
+torchvision
 cython
