@@ -9,7 +9,7 @@ matplotlib
 lap
 openpyxl
 Pillow
-ensobrada
+tensorboardX
 fvcore
 torch
 torchvision
