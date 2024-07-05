@@ -189,11 +189,18 @@ def eval_seq(opt, dataloader, data_type, result_filename, save_dir=None, show_im
     if save_dir:
         mkdir_if_missing(save_dir)
 
+    # Inicialize `img_size` com o primeiro frame do vídeo
+    ret, frame = dataloader.cap.read()
+    if not ret:
+        raise ValueError("Failed to read the first frame from the video.")
+
+    frame_height, frame_width = frame.shape[:2]
+    dataloader.img_size = (frame_width, frame_height)
+    dataloader.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Volte para o início do vídeo
+
     # Configurações do VideoWriter
     video_path = os.path.join(save_dir, 'output_video.avi')
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    frame_width = int(dataloader.img_size[0])
-    frame_height = int(dataloader.img_size[1])
     out = cv2.VideoWriter(video_path, fourcc, frame_rate, (frame_width, frame_height))
 
     tracker = JDETracker(opt, frame_rate=frame_rate)
