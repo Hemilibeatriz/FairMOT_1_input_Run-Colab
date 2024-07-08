@@ -280,6 +280,8 @@ def eval_seq(opt, dataloader, data_type, result_filename, save_dir=None, show_im
                                       service_area,max_detections_timestamp, max_detections)
 
                 # Adiciona o frame ao vídeo
+                if online_im.shape[1] != frame_width or online_im.shape[0] != frame_height:
+                    online_im = cv2.resize(online_im, (frame_width, frame_height))
                 out.write(online_im)
 
         if show_image:
