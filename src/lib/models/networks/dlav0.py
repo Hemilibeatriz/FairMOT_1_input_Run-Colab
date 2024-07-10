@@ -306,8 +306,9 @@ class DLA(nn.Module):
         if name.endswith('.pth'):
             model_weights = torch.load(data + name)
         else:
-            model_url = get_model_url(data, name, hash)
-            model_weights = model_zoo.load_url(model_url)
+            #model_url = get_model_url(data, name, hash)
+            #model_weights = model_zoo.load_url(model_url)
+            model_weights = torch.load("/content/FairMOT_1_input_Run-Colab/src/dlyfio/dla34-ba72cf86.pth")
         num_classes = len(model_weights[list(model_weights.keys())[-1]])
         self.fc = nn.Conv2d(
             self.channels[-1], num_classes,
